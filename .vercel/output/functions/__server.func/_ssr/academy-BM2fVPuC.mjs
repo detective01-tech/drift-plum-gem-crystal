@@ -1,4 +1,4 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/academy-BI0bfjf_.js
+//#region node_modules/.nitro/vite/services/ssr/assets/academy-BM2fVPuC.js
 var ARTICLES = [
 	{
 		slug: "what-is-osint",
@@ -71,6 +71,54 @@ var ARTICLES = [
 		]
 	},
 	{
+		slug: "visible-vulns",
+		title: "Vulnerabilities you can see without touching the server",
+		kicker: "Exposure",
+		minutes: 8,
+		body: [
+			"Most student “vulnerability scanners” are Nmap plus a copy of Nuclei. That is not OSINT, and against a host you do not own it is usually computer misuse. The interesting pedagogical fact is that a large class of weaknesses is already hanging off the front of the response: headers, cookies, robots.txt, DNS policy, certificate names.",
+			"OpenLens’s HTTP surface module issues a small number of public GETs. It records Strict-Transport-Security, Content-Security-Policy, X-Frame-Options / CSP frame-ancestors, X-Content-Type-Options, Referrer-Policy, Server, X-Powered-By, Set-Cookie flags, robots.txt, and RFC 9116 security.txt. That is the whole probe. No port range, no directory brute force, no payload.",
+			"Call the results observations, not “critical vulns”. A missing HSTS header is OWASP A05 / CWE-319. It is a configuration defect a defender should fix this week. It is not a shell. Mapping PHP/7.4.3 to a CVE catalogue is a literature review you can put in an appendix. Sending the CVE to the server is the line this laboratory will not cross.",
+			"robots.txt deserves its own paragraph. Disallow: /backup/ does not protect /backup/. It publishes a hypothesis about where secrets live. The OSINT finding is the line in the file. Fetching the zip is access."
+		]
+	},
+	{
+		slug: "owasp-a05",
+		title: "OWASP A05, read from the street",
+		kicker: "Exposure",
+		minutes: 7,
+		body: [
+			"OWASP Top 10:2021 A05 Security Misconfiguration covers default accounts, unnecessary features, verbose errors, missing security headers, and leftover staging. Several of those leak into public space.",
+			"Security headers are cheap. HSTS tells the browser to refuse HTTP. CSP is a seatbelt against injected script. frame-ancestors / X-Frame-Options stop other sites from overlaying your login. nosniff stops a text file from being executed as script. None of them require a WAF licence. Absence is a finding you can remediate in nginx in an afternoon.",
+			"A06 Vulnerable and Outdated Components is the neighbour. You do not need to exploit PHP 7.4 to know it is end-of-life — the X-Powered-By header told you. In a report, write: “The origin disclosed PHP/7.4.3. PHP 7.4 reached end-of-life on 28 November 2022. Recommendation: upgrade and hide the header.” Do not write: “I popped a shell.”",
+			"A07 Identification and Authentication Failures covers the mail side. SPF +all and a missing DMARC policy are public TXT records. They are the precondition for business-email compromise. They are not themselves a phish."
+		]
+	},
+	{
+		slug: "attack-paths",
+		title: "From a public fact to an attack path — and where to stop",
+		kicker: "Method",
+		minutes: 7,
+		body: [
+			"An attack path is a story: observation → inference → (the step you will not take) → defender action. The Training range in this lab is four such stories with fictional hostnames, so a viva never depends on a live website staying up.",
+			"Observation is what the source said: “TXT v=spf1 ip4:203.0.113.10 +all”. Inference is what a competent analyst thinks it means: “Receivers that honour SPF will still accept mail from any host.” The forbidden step is sending the invoice. The defender action is -all plus DMARC p=reject.",
+			"Examiners mark the stop line. A project that demonstrates Burp against a classmate’s site fails ethics. A project that shows a marked-up path and a remediation list passes. If you cannot say the stop line out loud, the step does not belong in the dissertation.",
+			"Two independent public sources make a correlation. One HTTP 200 does not. Write Observation and Inference as separate sentences. The range cases are written that way on purpose — copy the shape, not the fictional facts, into your self-audit."
+		]
+	},
+	{
+		slug: "email-auth",
+		title: "SPF, DKIM, and DMARC as OSINT",
+		kicker: "Collection",
+		minutes: 6,
+		body: [
+			"Sender Policy Framework is a TXT record listing who may send mail as the domain. The last mechanism matters: -all (fail closed), ~all (soft fail), +all (fail open, i.e. anyone). You query a resolver; you do not talk to the target’s MX.",
+			"DMARC sits at _dmarc.example.com and tells receivers what to do when SPF or DKIM fail: p=none (monitor), p=quarantine, p=reject. A domain with p=none a year after launch has unfinished work. A domain with no DMARC at all is asking to be impersonated.",
+			"DKIM needs a selector (google, s1, default…). Guessing selectors is closer to enumeration than this lab will do. Note the limitation in your report: “DKIM was not enumerated.”",
+			"None of this authorises a spoofed message. Publishing a screenshot of +all is the demonstration. Pressing send is fraud in every jurisdiction this lab mentions."
+		]
+	},
+	{
 		slug: "reduce-footprint",
 		title: "How to shrink your own digital footprint",
 		kicker: "Defence",
@@ -90,10 +138,10 @@ var ARTICLES = [
 		minutes: 5,
 		body: [
 			"Suggested title: “An Ethical Laboratory for Open-Source Intelligence and Personal Digital-Footprint Awareness.”",
-			"Learning outcomes to claim: (1) explain OSINT vs computer misuse; (2) collect public DNS/RDAP/profile evidence with provenance; (3) analyse EXIF and search-dork exposure; (4) produce a sourced intelligence report; (5) recommend footprint reductions.",
-			"Method: run the built-in sample subject for screenshots, then repeat the full cycle on accounts you own. Export the case file. Include the ethics charter you accepted as Appendix A.",
-			"Cite OpenLens as the instrument, not as the literature. Literature: Bellingcat’s online investigation guides; NATO OSINT Handbook; SANS OSINT resources; RFC 9083 (RDAP); certificate-transparency.org; your university ethics policy; PECA 2016 for Pakistani submissions.",
-			"Limitations section (examiners like this): HTTP 200 is not identity; geolocation is probabilistic; many platforms block datacentre IPs; no breach data; no social-graph API."
+			"Learning outcomes to claim: (1) explain OSINT vs computer misuse; (2) collect public DNS/RDAP/profile evidence with provenance; (3) analyse EXIF and search-dork exposure; (4) map public HTTP headers and DNS mail policy to OWASP A05 / CWE ids without exploiting them; (5) produce a sourced intelligence report; (6) recommend footprint reductions.",
+			"Method: run the built-in sample subject for screenshots, walk one Training range case in the viva, then repeat the full cycle on accounts you own. Export the case file. Include the ethics charter you accepted as Appendix A.",
+			"Cite OpenLens as the instrument, not as the literature. Literature: Bellingcat’s online investigation guides; NATO OSINT Handbook; SANS OSINT resources; RFC 9083 (RDAP); RFC 9116 (security.txt); certificate-transparency.org; OWASP Top 10:2021 (especially A05 Security Misconfiguration); your university ethics policy; PECA 2016 for Pakistani submissions.",
+			"Limitations section (examiners like this): HTTP 200 is not identity; geolocation is probabilistic; many platforms block datacentre IPs; no breach data; no social-graph API; header checks are not a penetration test; missing HSTS is not a CVE exploit."
 		]
 	}
 ];
@@ -158,6 +206,66 @@ var QUIZ = [
 		],
 		answer: 2,
 		why: "Self-audit (or a fictional/sample subject) is the only ethically clean default for coursework."
+	},
+	{
+		id: "q6",
+		q: "A site’s HTTPS response has no Strict-Transport-Security header. The correct write-up is:",
+		options: [
+			"Critical remote-code-execution vulnerability",
+			"OWASP A05 observation: missing HSTS; recommend enabling it; do not SSL-strip the host",
+			"Proof that the certificate is forged",
+			"Licence to run sslstrip on the campus Wi-Fi"
+		],
+		answer: 1,
+		why: "Missing HSTS is a real misconfiguration and a real recommendation. Exploiting the missing header is not the lab."
+	},
+	{
+		id: "q7",
+		q: "robots.txt contains “Disallow: /backup/”. What have you established?",
+		options: [
+			"The backup zip is downloadable",
+			"The operator published a path they would rather search engines skipped — which is not a lock",
+			"You may fetch /backup/ because they invited you",
+			"The site has no backups"
+		],
+		answer: 1,
+		why: "The finding is the public line. Fetching /backup on a host you do not own is access, not OSINT."
+	},
+	{
+		id: "q8",
+		q: "SPF “v=spf1 ip4:203.0.113.10 +all” means:",
+		options: [
+			"Only 203.0.113.10 may send mail",
+			"Mail is encrypted",
+			"Every host, including the named one, is an authorised sender — fail-open",
+			"DMARC is set to reject"
+		],
+		answer: 2,
+		why: "+all authorises the internet. The ip4 mechanism is then decorative."
+	},
+	{
+		id: "q9",
+		q: "X-Powered-By: PHP/7.4.3 is best classified as:",
+		options: [
+			"An exploit you should fire in the viva",
+			"Information disclosure (CWE-200) that supports a patch recommendation",
+			"Proof of a webshell",
+			"A private header only the admin can see"
+		],
+		answer: 1,
+		why: "The version is public because the server sent it. Looking up CVEs is reading. Using them is misuse."
+	},
+	{
+		id: "q10",
+		q: "Certificate transparency lists staging.example.com. You may:",
+		options: [
+			"Report the public name and recommend a private CA — then stop",
+			"Nmap the host “just to see”",
+			"Try admin:admin on the staging login",
+			"Paste a Nuclei template at it for bonus marks"
+		],
+		answer: 0,
+		why: "crt.sh is OSINT. The next packet toward staging is a test, and tests need written scope."
 	}
 ];
 //#endregion

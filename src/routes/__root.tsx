@@ -16,7 +16,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "OpenLens is an educational OSINT laboratory for digital-footprint awareness, public-source collection, and ethical intelligence practice.",
+          "OpenLens is an educational OSINT laboratory for digital-footprint awareness, public-source collection, and ethical mapping of visible misconfiguration.",
       },
       { name: "theme-color", content: "#0b0c0e" },
     ],

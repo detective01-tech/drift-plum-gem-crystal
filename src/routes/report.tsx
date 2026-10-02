@@ -132,7 +132,8 @@ function ReportPage() {
           <section className="text-xs leading-relaxed text-faint">
             <p>
               Limitations: HTTP 200 is not identity. IP geolocation is probabilistic. Many platforms block datacentre
-              IPs. No breach corpora. No authentication bypass. This instrument is for education.
+              IPs. Header checks are not a penetration test. No breach corpora. No authentication bypass. This
+              instrument is for education.
             </p>
             <p className="mt-2">
               Suggested citation: OpenLens (2026). Educational OSINT Laboratory. Web application.

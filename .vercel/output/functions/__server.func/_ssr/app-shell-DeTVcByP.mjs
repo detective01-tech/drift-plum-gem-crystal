@@ -1,13 +1,13 @@
 import { a as __toESM } from "./rolldown-runtime-D7D4PA-g.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
-import { d as useRouterState, v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+import { b as Link, p as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
-import { a as Phone, c as Image, d as Github, f as Binary, i as Search, l as Hash, n as UserRound, o as Menu, p as AtSign, s as Link2, t as X, u as Globe } from "../_libs/lucide-react.mjs";
+import { a as Search, c as Menu, d as Hash, f as Globe, h as AtSign, i as ShieldAlert, l as Link2, m as Binary, n as UserRound, o as Route, p as Github, s as Phone, t as X, u as Image } from "../_libs/lucide-react.mjs";
 import { a as DialogPortal, i as DialogOverlay, n as DialogClose, o as DialogTitle, p as Slot, r as DialogContent, t as Dialog } from "../_libs/@radix-ui/react-dialog+[...].mjs";
 import { t as cva } from "../_libs/class-variance-authority+clsx.mjs";
-import { i as cn } from "./router-B9M01Ilw.mjs";
+import { i as cn } from "./router-6Ed5zkYE.mjs";
 import { n as create, t as persist } from "../_libs/zustand.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-328RJKdX.js
+//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-DeTVcByP.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function LensMark({ className }) {
@@ -117,8 +117,8 @@ var TOOLS = [
 		id: "domain",
 		name: "Domain intel",
 		group: "collection",
-		blurb: "DNS records, RDAP registration, certificate-transparency names.",
-		lesson: "DNS and RDAP are public by design. They tell you how a name is delegated (MX, NS, TXT), who registered it, and which hostnames appeared on public TLS certificates. This is passive reconnaissance — no port scans, no brute force.",
+		blurb: "DNS records, RDAP registration, certificate-transparency names, SPF/DMARC.",
+		lesson: "DNS and RDAP are public by design. They tell you how a name is delegated (MX, NS, TXT), who registered it, and which hostnames appeared on public TLS certificates. SPF and DMARC live in the same TXT records — they are email-authentication policy, not a licence to spoof. This is passive reconnaissance — no port scans, no brute force.",
 		sample: "example.com",
 		sampleHint: "IANA reserved documentation domain",
 		icon: Globe
@@ -202,9 +202,35 @@ var TOOLS = [
 		sample: "your-name",
 		sampleHint: "Use your own name or brand",
 		icon: Search
+	},
+	{
+		id: "exposure",
+		name: "HTTP surface",
+		group: "exposure",
+		blurb: "Passive security headers, cookies, robots.txt, security.txt. Not a pentest.",
+		lesson: "A single public GET is enough to see missing HSTS, a PHP version in X-Powered-By, cookies without HttpOnly, and a robots.txt that names /backup/. Those are OWASP A05 observations. This module never port-scans, never fuzzes paths, and never sends an exploit. Run it on a site you own, or on the sample.",
+		sample: "https://example.com",
+		sampleHint: "IANA example site",
+		icon: ShieldAlert
+	},
+	{
+		id: "range",
+		name: "Training range",
+		group: "exposure",
+		blurb: "Four fictional cases: misconfig, mail spoofing, EXIF, staging leak.",
+		lesson: "Live sites go down, block datacentre IPs, and are a poor viva. The range is a marked script of four organisations that never existed. Each case maps an OSINT observation to an OWASP/CWE id, draws the attack path, and paints a red stop line before the payload. You cannot exploit a hostname that is not real — which is the point.",
+		sample: "",
+		sampleHint: "Load Harbor Clinic",
+		icon: Route
 	}
 ];
 var TOOL_BY_ID = Object.fromEntries(TOOLS.map((t) => [t.id, t]));
+var GROUP_LABEL = {
+	collection: "Collection",
+	local: "Local analysis",
+	exposure: "Exposure",
+	output: "Output"
+};
 var CYCLE = [
 	{
 		step: "01",
@@ -358,6 +384,11 @@ function NavLinks({ onNavigate }) {
 			items: NAV.filter((n) => n.group === "local")
 		},
 		{
+			key: "exposure",
+			label: "Exposure",
+			items: NAV.filter((n) => n.group === "exposure")
+		},
+		{
 			key: "out",
 			label: "Output",
 			items: NAV.filter((n) => [
@@ -472,4 +503,4 @@ function AppShell({ children }) {
 	}) });
 }
 //#endregion
-export { TOOL_BY_ID as a, TOOLS as i, Button as n, useCaseFile as o, CYCLE as r, AppShell as t };
+export { TOOLS as a, GROUP_LABEL as i, Button as n, TOOL_BY_ID as o, CYCLE as r, useCaseFile as s, AppShell as t };

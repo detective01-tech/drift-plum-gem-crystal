@@ -33,7 +33,7 @@ function Academy() {
         </ul>
         <div className="mt-14">
           <h2 className="font-display text-3xl tracking-tight">Ethics quiz</h2>
-          <p className="mt-2 text-sm text-muted">Five questions. Save the score to the case file for your appendix.</p>
+          <p className="mt-2 text-sm text-muted">Ten questions. Save the score to the case file for your appendix.</p>
           <Quiz />
         </div>
       </div>

@@ -20,14 +20,14 @@ function Home() {
           See what the open web already knows — then write it up properly.
         </h1>
         <p className="mt-6 max-w-2xl text-base text-muted sm:text-lg">
-          OpenLens is an educational OSINT workbench. It queries public DNS, public profiles, and files you already
-          have so you can audit your own digital footprint. It will not crack passwords, scan ports, or hunt people
-          who did not consent.
+          OpenLens is an educational OSINT workbench. It queries public DNS, public profiles, HTTP headers, and files
+          you already have so you can audit your own digital footprint and map visible misconfiguration to OWASP —
+          without exploiting it. It will not crack passwords, scan ports, or hunt people who did not consent.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button asChild>
-            <Link to="/lab/$tool" params={{ tool: "username" }}>
-              Start with username recon
+            <Link to="/lab/$tool" params={{ tool: "exposure" }}>
+              Start with HTTP surface
               <ArrowRight className="size-4" />
             </Link>
           </Button>
@@ -36,8 +36,8 @@ function Home() {
           </Button>
         </div>
         <dl className="mt-12 grid grid-cols-3 gap-4 border-y border-border py-6">
-          <Stat n="10" l="modules" />
-          <Stat n="24" l="profile sources" />
+          <Stat n="12" l="modules" />
+          <Stat n="4" l="range cases" />
           <Stat n={String(findings)} l="case findings" />
         </dl>
 
@@ -89,10 +89,11 @@ function Home() {
           <h2 className="font-display text-2xl">How to demo this in a viva</h2>
           <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm text-muted">
             <li>Load the sample subject on Username, Domain, IP, and GitHub — they are public documentation accounts.</li>
+            <li>Run HTTP surface on example.com and walk one Training range case (Harbor Clinic is the default viva script).</li>
             <li>Drop a photo you took into Image forensics and show whether GPS was stored.</li>
             <li>Build search dorks for your own name; open one query in a new tab.</li>
             <li>Save findings to the case file and print / export the report.</li>
-            <li>Take the five-question ethics quiz in the Academy.</li>
+            <li>Take the ten-question ethics and exposure quiz in the Academy.</li>
           </ol>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild variant="secondary">

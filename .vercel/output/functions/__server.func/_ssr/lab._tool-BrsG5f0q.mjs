@@ -1,18 +1,18 @@
 import { a as __toESM } from "./rolldown-runtime-D7D4PA-g.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
-import { v as Link, z as notFound } from "../_libs/@tanstack/react-router+[...].mjs";
+import { J as notFound, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
 import { a as string, i as object, t as array } from "../_libs/zod.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
-import { i as cn, n as Route } from "./router-B9M01Ilw.mjs";
-import { a as TOOL_BY_ID, n as Button, o as useCaseFile, t as AppShell } from "./app-shell-328RJKdX.mjs";
+import { i as cn, n as Route$1 } from "./router-6Ed5zkYE.mjs";
+import { i as GROUP_LABEL, n as Button, o as TOOL_BY_ID, s as useCaseFile, t as AppShell } from "./app-shell-DeTVcByP.mjs";
 import { i as getServerFnById, n as createServerFn, r as TSS_SERVER_FUNCTION } from "./ssr.mjs";
 import { i as USERNAME_RE, n as PLATFORMS, o as isEmail, s as isHttpUrl, t as DISPOSABLE_DOMAINS } from "./validate-oSww8SoE.mjs";
-import { t as Badge } from "./badge-DoYw696V.mjs";
-import { n as Label, r as Textarea, t as Input } from "./textarea-C8N6TXwU.mjs";
+import { t as Badge } from "./badge-BrMyOu1F.mjs";
+import { n as Label, r as Textarea, t as Input } from "./textarea-DUHBqqKz.mjs";
 import { t as tt } from "../_libs/exifr.mjs";
 import { t as parsePhoneNumber } from "../_libs/libphonenumber-js.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/lab._tool-DPr3mnnM.js
+//#region node_modules/.nitro/vite/services/ssr/assets/lab._tool-BrsG5f0q.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AddFindingButton({ tool, query, summary, detail }) {
@@ -33,13 +33,143 @@ function AddFindingButton({ tool, query, summary, detail }) {
 		children: "Add to case file"
 	});
 }
+var SEVERITY = {
+	ok: {
+		label: "Sound",
+		variant: "ok",
+		ring: "border-ok/30"
+	},
+	info: {
+		label: "Note",
+		variant: "default",
+		ring: "border-border"
+	},
+	low: {
+		label: "Low",
+		variant: "warn",
+		ring: "border-warn/35"
+	},
+	medium: {
+		label: "Medium",
+		variant: "danger",
+		ring: "border-danger/35"
+	}
+};
+function FindingCard({ finding }) {
+	const sev = SEVERITY[finding.severity];
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+		className: cn("rounded-xl border bg-card p-4 sm:p-5", sev.ring),
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex flex-wrap items-center gap-2",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+						variant: sev.variant,
+						children: sev.label
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "font-mono text-[11px] text-faint",
+						children: finding.owasp
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "font-mono text-[11px] text-faint",
+						children: finding.cwe
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+				className: "mt-3 font-medium leading-snug",
+				children: finding.title
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("dl", {
+				className: "mt-3 space-y-2 text-sm",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
+						className: "text-[11px] tracking-[0.14em] text-faint uppercase",
+						children: "Observation"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+						className: "mt-0.5 font-mono text-xs leading-relaxed break-all text-muted",
+						children: finding.observation
+					})] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
+						className: "text-[11px] tracking-[0.14em] text-faint uppercase",
+						children: "Why it matters"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+						className: "mt-0.5 text-muted",
+						children: finding.why
+					})] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
+						className: "text-[11px] tracking-[0.14em] text-faint uppercase",
+						children: "Fix"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+						className: "mt-0.5 text-foreground/90",
+						children: finding.fix
+					})] }),
+					finding.stop !== "N/A" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "rounded-md border border-danger/25 bg-danger/5 px-3 py-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
+							className: "text-[11px] tracking-[0.14em] text-danger uppercase",
+							children: "Stop line"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+							className: "mt-0.5 text-sm text-foreground/90",
+							children: finding.stop
+						})]
+					}) : null
+				]
+			})
+		]
+	});
+}
+function ScoreBoard({ score, findings }) {
+	const medium = findings.filter((f) => f.severity === "medium").length;
+	const low = findings.filter((f) => f.severity === "low").length;
+	const info = findings.filter((f) => f.severity === "info").length;
+	const ok = findings.filter((f) => f.severity === "ok").length;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "flex flex-wrap items-end justify-between gap-4 rounded-xl border border-border bg-card p-5",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "text-[11px] tracking-[0.16em] text-faint uppercase",
+				children: "Hardening score"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: cn("mt-1 font-display text-5xl tabular-nums", score >= 80 ? "text-ok" : score >= 55 ? "text-warn" : "text-danger"),
+				children: score
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "mt-1 max-w-sm text-xs text-muted",
+				children: "Educational index from public headers and well-known files. Not a pentest grade, not a CVE count."
+			})
+		] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
+			className: "grid grid-cols-2 gap-x-6 gap-y-1 font-mono text-xs tabular-nums text-muted",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-danger",
+					children: medium
+				}), " medium"] }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-warn",
+					children: low
+				}), " low"] }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-faint",
+					children: info
+				}), " notes"] }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-ok",
+					children: ok
+				}), " sound"] })
+			]
+		})]
+	});
+}
 function ToolFrame({ tool, children, onSample }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "mx-auto max-w-3xl",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 				className: "text-[11px] tracking-[0.18em] text-accent uppercase",
-				children: tool.group === "local" ? "Local analysis" : "Collection"
+				children: GROUP_LABEL[tool.group]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
 				className: "mt-2 font-display text-4xl tracking-tight sm:text-5xl",
@@ -115,7 +245,8 @@ var lookupEmail = createServerFn({ method: "POST" }).validator(object({
 })).handler(createSsrRpc("2a9207625e8d4cd382bf7bfe0a5bdbb314241a995a500991db7bed76e936ae58"));
 var lookupGithub = createServerFn({ method: "POST" }).validator(object({ username: string().min(1).max(39) })).handler(createSsrRpc("2d252b0443236e18d7907cf965c40e82e526f9a2270a1ced847f4e7c8c05febd"));
 var inspectUrl = createServerFn({ method: "POST" }).validator(object({ url: string().min(8).max(1500) })).handler(createSsrRpc("472577c7cd78520f352dfd50039434701c58de9cbba8d770aa825ffc822fd4a9"));
-var tool$9 = TOOL_BY_ID.domain;
+var inspectSurface = createServerFn({ method: "POST" }).validator(object({ url: string().min(8).max(1500) })).handler(createSsrRpc("5888f37f020ba24d85ccc2d8220ef66967513856b6ec064e18ab5714242da9dd"));
+var tool$11 = TOOL_BY_ID.domain;
 function DomainTool() {
 	const [domain, setDomain] = (0, import_react.useState)("");
 	const [busy, setBusy] = (0, import_react.useState)(false);
@@ -148,10 +279,10 @@ function DomainTool() {
 		}
 	}
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
-		tool: tool$9,
+		tool: tool$11,
 		onSample: () => {
-			setDomain(tool$9.sample);
-			run(tool$9.sample);
+			setDomain(tool$11.sample);
+			run(tool$11.sample);
 		},
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
@@ -207,6 +338,33 @@ function DomainTool() {
 							value: result.rdap.nameservers.join(", ")
 						}
 					] }),
+					result.mailAuth ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+						className: "space-y-3",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex flex-wrap items-center gap-2",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+										className: "text-xs tracking-[0.16em] text-faint uppercase",
+										children: "Email authentication (SPF / DMARC)"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+										variant: result.mailAuth.spf.qualifier === "reject" ? "ok" : "warn",
+										children: ["SPF ", result.mailAuth.spf.qualifier]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+										variant: result.mailAuth.dmarc.policy === "reject" || result.mailAuth.dmarc.policy === "quarantine" ? "ok" : "warn",
+										children: ["DMARC ", result.mailAuth.dmarc.policy]
+									})
+								]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-sm text-muted",
+								children: "Read from public TXT records. This is not a spoof test — do not send mail as this domain."
+							}),
+							result.mailAuth.findings.map((f) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FindingCard, { finding: f }, f.id))
+						]
+					}) : null,
 					result.dns.map((block) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
 						className: "mb-2 text-xs tracking-[0.16em] text-faint uppercase",
 						children: [block.type, " records"]
@@ -234,7 +392,8 @@ function DomainTool() {
 							summary: `DNS + RDAP for ${result.domain}${result.rdap.registrar ? ` (${result.rdap.registrar})` : ""}`,
 							detail: JSON.stringify({
 								rdap: result.rdap,
-								dns: result.dns
+								dns: result.dns,
+								mailAuth: result.mailAuth
 							}, null, 2)
 						})]
 					}),
@@ -317,12 +476,12 @@ function duckUrl(query) {
 function googleUrl(query) {
 	return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
 }
-var tool$8 = TOOL_BY_ID.dorks;
+var tool$10 = TOOL_BY_ID.dorks;
 function DorksTool() {
 	const [subject, setSubject] = (0, import_react.useState)("");
 	const dorks = (0, import_react.useMemo)(() => buildDorks(subject), [subject]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
-		tool: tool$8,
+		tool: tool$10,
 		onSample: () => setSubject("Ada Lovelace"),
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -510,7 +669,7 @@ function md5(str) {
 	}
 	return md51(unescape(encodeURIComponent(str))).map(rhex).join("");
 }
-var tool$7 = TOOL_BY_ID.email;
+var tool$9 = TOOL_BY_ID.email;
 function EmailTool() {
 	const [email, setEmail] = (0, import_react.useState)("");
 	const [busy, setBusy] = (0, import_react.useState)(false);
@@ -540,10 +699,10 @@ function EmailTool() {
 		}
 	}
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
-		tool: tool$7,
+		tool: tool$9,
 		onSample: () => {
-			setEmail(tool$7.sample);
-			run(tool$7.sample);
+			setEmail(tool$9.sample);
+			run(tool$9.sample);
 		},
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
@@ -629,7 +788,169 @@ function EmailTool() {
 		]
 	});
 }
-var tool$6 = TOOL_BY_ID.github;
+var tool$8 = TOOL_BY_ID.exposure;
+function ExposureTool() {
+	const [url, setUrl] = (0, import_react.useState)("");
+	const [busy, setBusy] = (0, import_react.useState)(false);
+	const [error, setError] = (0, import_react.useState)(null);
+	const [result, setResult] = (0, import_react.useState)(null);
+	async function run(target) {
+		if (!isHttpUrl(target)) {
+			setError("Only public http(s) URLs you are allowed to look at.");
+			return;
+		}
+		setBusy(true);
+		setError(null);
+		try {
+			setResult(await inspectSurface({ data: { url: target } }));
+		} catch (err) {
+			setResult(null);
+			setError(err instanceof Error ? err.message : "Surface check failed");
+		} finally {
+			setBusy(false);
+		}
+	}
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
+		tool: tool$8,
+		onSample: () => {
+			setUrl(tool$8.sample);
+			run(tool$8.sample);
+		},
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "mb-5 rounded-xl border border-border bg-card px-4 py-3 text-sm text-muted",
+				children: "One public GET plus robots.txt and security.txt. No ports, no directory brute force, no payloads. Use a hostname you own — or the sample."
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+				className: "flex flex-col gap-3 sm:flex-row sm:items-end",
+				onSubmit: (e) => {
+					e.preventDefault();
+					run(url);
+				},
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex-1 space-y-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+						htmlFor: "surface-url",
+						children: "Public URL"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+						id: "surface-url",
+						value: url,
+						placeholder: "https://example.com",
+						autoComplete: "off",
+						onChange: (e) => setUrl(e.target.value)
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					type: "submit",
+					disabled: busy,
+					children: busy ? "Reading headers…" : "Check surface"
+				})]
+			}),
+			error ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "mt-3 text-sm text-danger",
+				children: error
+			}) : null,
+			result ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mt-8 space-y-6",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScoreBoard, {
+						score: result.score,
+						findings: result.findings
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResultTable, { rows: [
+						{
+							label: "Requested",
+							value: result.url
+						},
+						{
+							label: "Final URL",
+							value: result.finalUrl
+						},
+						{
+							label: "HTTPS",
+							value: result.https ? "yes" : "no"
+						},
+						{
+							label: "HTTP status",
+							value: String(result.status)
+						},
+						{
+							label: "Hops",
+							value: result.hops.join(" → ")
+						}
+					] }),
+					Object.keys(result.headers).length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "mb-2 text-xs tracking-[0.16em] text-faint uppercase",
+						children: "Captured response headers"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+						className: "space-y-1 rounded-lg border border-border bg-card p-4 font-mono text-xs leading-relaxed",
+						children: Object.entries(result.headers).map(([k, v]) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+							className: "break-all",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-accent",
+									children: k
+								}),
+								": ",
+								v
+							]
+						}, k))
+					})] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-sm text-muted",
+						children: "No security-relevant headers on the final response."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+						className: "space-y-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-xs tracking-[0.16em] text-faint uppercase",
+							children: "Findings"
+						}), result.findings.map((f) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FindingCard, { finding: f }, f.id))]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AddFindingButton, {
+						tool: "exposure",
+						query: result.finalUrl,
+						summary: `HTTP surface score ${result.score}/100 · ${result.findings.filter((f) => f.severity === "medium" || f.severity === "low").length} issues on ${new URL(result.finalUrl).hostname}`,
+						detail: JSON.stringify({
+							score: result.score,
+							headers: result.headers,
+							findings: result.findings.map((f) => ({
+								id: f.id,
+								severity: f.severity,
+								title: f.title,
+								owasp: f.owasp,
+								cwe: f.cwe
+							}))
+						}, null, 2)
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						className: "text-sm text-muted",
+						children: [
+							"Read",
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/academy/$slug",
+								params: { slug: "visible-vulns" },
+								className: "underline-offset-4 hover:underline",
+								children: "visible vulnerabilities"
+							}),
+							" ",
+							"and",
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/academy/$slug",
+								params: { slug: "owasp-a05" },
+								className: "underline-offset-4 hover:underline",
+								children: "OWASP A05"
+							}),
+							" ",
+							"before the viva."
+						]
+					})
+				]
+			}) : null
+		]
+	});
+}
+var tool$7 = TOOL_BY_ID.github;
 function GithubTool() {
 	const [username, setUsername] = (0, import_react.useState)("");
 	const [busy, setBusy] = (0, import_react.useState)(false);
@@ -649,10 +970,10 @@ function GithubTool() {
 	}
 	const profile = result && result.found ? result.profile : null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
-		tool: tool$6,
+		tool: tool$7,
 		onSample: () => {
-			setUsername(tool$6.sample);
-			run(tool$6.sample);
+			setUsername(tool$7.sample);
+			run(tool$7.sample);
 		},
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
@@ -875,13 +1196,13 @@ function identifyHash(input) {
 	});
 	return guesses;
 }
-var tool$5 = TOOL_BY_ID.hash;
+var tool$6 = TOOL_BY_ID.hash;
 function HashTool() {
-	const [raw, setRaw] = (0, import_react.useState)(tool$5.sample);
+	const [raw, setRaw] = (0, import_react.useState)(tool$6.sample);
 	const guesses = (0, import_react.useMemo)(() => identifyHash(raw), [raw]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
-		tool: tool$5,
-		onSample: () => setRaw(tool$5.sample),
+		tool: tool$6,
+		onSample: () => setRaw(tool$6.sample),
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "space-y-2",
@@ -935,7 +1256,7 @@ function HashTool() {
 		]
 	});
 }
-var tool$4 = TOOL_BY_ID.image;
+var tool$5 = TOOL_BY_ID.image;
 function ImageTool() {
 	const [meta, setMeta] = (0, import_react.useState)(null);
 	const [preview, setPreview] = (0, import_react.useState)(null);
@@ -973,7 +1294,7 @@ function ImageTool() {
 		}
 	}
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
-		tool: tool$4,
+		tool: tool$5,
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
 				className: "flex min-h-40 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card px-4 py-10 text-center",
@@ -1070,7 +1391,7 @@ function str(v) {
 	if (typeof v === "string" && v.trim()) return v;
 	if (typeof v === "number") return String(v);
 }
-var tool$3 = TOOL_BY_ID.ip;
+var tool$4 = TOOL_BY_ID.ip;
 function IpTool() {
 	const [ip, setIp] = (0, import_react.useState)("");
 	const [busy, setBusy] = (0, import_react.useState)(false);
@@ -1089,10 +1410,10 @@ function IpTool() {
 		}
 	}
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
-		tool: tool$3,
+		tool: tool$4,
 		onSample: () => {
-			setIp(tool$3.sample);
-			run(tool$3.sample);
+			setIp(tool$4.sample);
+			run(tool$4.sample);
 		},
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
@@ -1186,7 +1507,7 @@ function IpTool() {
 		]
 	});
 }
-var tool$2 = TOOL_BY_ID.phone;
+var tool$3 = TOOL_BY_ID.phone;
 function describe(n) {
 	const type = n.getType();
 	return {
@@ -1201,14 +1522,14 @@ function describe(n) {
 	};
 }
 function PhoneTool() {
-	const [raw, setRaw] = (0, import_react.useState)(tool$2.sample);
+	const [raw, setRaw] = (0, import_react.useState)(tool$3.sample);
 	const parsed = (0, import_react.useMemo)(() => {
 		const n = parsePhoneNumber(raw.trim());
 		return n ? describe(n) : null;
 	}, [raw]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
-		tool: tool$2,
-		onSample: () => setRaw(tool$2.sample),
+		tool: tool$3,
+		onSample: () => setRaw(tool$3.sample),
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "space-y-2",
@@ -1276,6 +1597,526 @@ function PhoneTool() {
 					})
 				]
 			}) : null
+		]
+	});
+}
+var KIND = {
+	observe: {
+		label: "Observe",
+		className: "border-border text-muted"
+	},
+	infer: {
+		label: "Infer",
+		className: "border-warn/40 text-warn"
+	},
+	stop: {
+		label: "Stop",
+		className: "border-danger/45 bg-danger/5 text-danger"
+	},
+	defend: {
+		label: "Defend",
+		className: "border-ok/40 text-ok"
+	}
+};
+function AttackPath({ steps }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
+		className: "space-y-3",
+		children: steps.map((step, i) => {
+			const k = KIND[step.kind];
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+				className: cn("rounded-xl border bg-card p-4", k.className),
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-baseline gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "font-mono text-[11px] tabular-nums text-accent",
+							children: step.n
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-[11px] tracking-[0.16em] uppercase",
+							children: k.label
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-2 font-medium text-foreground",
+						children: step.title
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-1 text-sm text-muted",
+						children: step.body
+					}),
+					i < steps.length - 1 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-3 font-mono text-[10px] tracking-[0.2em] text-faint uppercase",
+						children: "↓"
+					}) : null
+				]
+			}, step.n);
+		})
+	});
+}
+var SCENARIOS = [
+	{
+		id: "harbor-clinic",
+		kicker: "Web misconfiguration",
+		title: "Harbor Clinic — the street-view stack",
+		org: "Fictional private clinic (training range only)",
+		minutes: 8,
+		blurb: "A public homepage leaks its runtime, forgets security headers, and advertises /backup/ in robots.txt. Nothing here is an exploit — it is what a stranger learns from one GET.",
+		viva: "Explain the difference between information disclosure (CWE-200) and exploiting a PHP CVE. Examiners want the stop line.",
+		evidence: [
+			{
+				label: "Host",
+				value: "www.harbor-clinic.example (fictional)"
+			},
+			{
+				label: "Server",
+				value: "Apache/2.4.41 (Ubuntu)"
+			},
+			{
+				label: "X-Powered-By",
+				value: "PHP/7.4.3"
+			},
+			{
+				label: "HTTPS",
+				value: "Yes, no HSTS"
+			},
+			{
+				label: "robots.txt",
+				value: "Disallow: /backup/  ·  Disallow: /phpmyadmin/"
+			},
+			{
+				label: "security.txt",
+				value: "absent"
+			}
+		],
+		findings: [
+			{
+				id: "hc-php",
+				title: "PHP/7.4.3 advertised on every page",
+				severity: "medium",
+				owasp: "A06:2021 Vulnerable Components",
+				cwe: "CWE-200",
+				observation: "X-Powered-By: PHP/7.4.3 — end-of-life since 2022.",
+				why: "The version is a public index into the CVE list. The header is the finding. The exploit is a different, illegal act.",
+				fix: "Upgrade to a supported PHP. Set expose_php=off. Stop sending X-Powered-By.",
+				stop: "Do not run a PHP exploit, webshell, or scanner against any clinic — fictional or real."
+			},
+			{
+				id: "hc-headers",
+				title: "No HSTS, CSP, or frame-ancestors",
+				severity: "medium",
+				owasp: "A05:2021 Misconfiguration",
+				cwe: "CWE-693",
+				observation: "Strict-Transport-Security, Content-Security-Policy, X-Frame-Options all absent.",
+				why: "A login page that can be framed is a clickjacking classroom example. Missing HSTS leaves the first hop on HTTP.",
+				fix: "Add the three headers at the reverse proxy. Test with this lab’s HTTP surface module.",
+				stop: "Do not host a clickjacking PoC against the live hostname."
+			},
+			{
+				id: "hc-robots",
+				title: "robots.txt points at backup and phpMyAdmin",
+				severity: "medium",
+				owasp: "A05:2021 Misconfiguration",
+				cwe: "CWE-200",
+				observation: "Disallow: /backup/ · Disallow: /phpmyadmin/",
+				why: "Search engines are asked not to index those paths. Humans read the same file. Disallow is not a password.",
+				fix: "Remove the apps from the public vhost. Firewall phpMyAdmin. Delete backup zips from the web root. Then rewrite robots.txt.",
+				stop: "Do not fetch /backup or /phpmyadmin on a host you do not own. That is access, not OSINT."
+			}
+		],
+		path: [
+			{
+				n: "01",
+				kind: "observe",
+				title: "One public GET",
+				body: "Headers and robots.txt are volunteered by the server. No login, no scan, no payload."
+			},
+			{
+				n: "02",
+				kind: "infer",
+				title: "Stack + forgotten paths",
+				body: "PHP 7.4.3 plus /backup/ is a hypothesis: unpatched runtime, possible leftover archive. Hypothesis is not proof."
+			},
+			{
+				n: "03",
+				kind: "stop",
+				title: "Stop before the payload",
+				body: "Looking up CVE-2024-… in a database is literature. Sending it to the clinic is PECA / Computer Misuse. The range ends here."
+			},
+			{
+				n: "04",
+				kind: "defend",
+				title: "What the clinic should do this week",
+				body: "Patch PHP, hide versions, add headers, pull admin tools off the internet, publish security.txt, take a backup that is not in /var/www."
+			}
+		]
+	},
+	{
+		id: "northwind-mail",
+		kicker: "Email authentication",
+		title: "Northwind Logistics — anyone may speak as finance",
+		org: "Fictional freight SME (training range only)",
+		minutes: 7,
+		blurb: "DNS says the company has mail. SPF ends in +all. There is no DMARC. A stranger can see, from public TXT records, that spoofed invoices will likely deliver.",
+		viva: "Quote the SPF record, explain +all versus -all, and say why actually sending a spoofed message is fraud, not a lab exercise.",
+		evidence: [
+			{
+				label: "Domain",
+				value: "northwind-lab.example (fictional)"
+			},
+			{
+				label: "MX",
+				value: "10 mail.northwind-lab.example"
+			},
+			{
+				label: "SPF",
+				value: "v=spf1 ip4:203.0.113.10 +all"
+			},
+			{
+				label: "DMARC",
+				value: "none published"
+			},
+			{
+				label: "DKIM",
+				value: "not enumerated (selector guessing is out of scope)"
+			}
+		],
+		findings: [{
+			id: "nw-spf",
+			title: "SPF fail-open (+all)",
+			severity: "medium",
+			owasp: "A07:2021 Identification Failures",
+			cwe: "CWE-290",
+			observation: "v=spf1 ip4:203.0.113.10 +all",
+			why: "The ip4 mechanism names one server, then +all authorises the rest of the internet. Receivers that honour SPF will still pass a forged message.",
+			fix: "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all — only list real senders.",
+			stop: "Do not send a fake invoice from accounts@northwind-lab.example. That is a crime, not a screenshot."
+		}, {
+			id: "nw-dmarc",
+			title: "No DMARC policy",
+			severity: "medium",
+			owasp: "A07:2021 Identification Failures",
+			cwe: "CWE-290",
+			observation: "_dmarc.northwind-lab.example NXDOMAIN",
+			why: "Without p=quarantine or p=reject, even a good SPF is advisory. Finance staff will see a normal-looking mail from their own domain.",
+			fix: "Start with p=none and rua= reports for two weeks, then raise the policy.",
+			stop: "No phishing the accounts team “to raise awareness” without a signed exercise and a lawyer."
+		}],
+		path: [
+			{
+				n: "01",
+				kind: "observe",
+				title: "TXT and MX are public",
+				body: "Cloudflare DNS-over-HTTPS returns the same records anyone can see. No packet is sent to Northwind’s mail server."
+			},
+			{
+				n: "02",
+				kind: "infer",
+				title: "Spoofed finance mail will probably land",
+				body: "+all plus no DMARC is a classic BEC (business email compromise) precondition. It is still only a precondition."
+			},
+			{
+				n: "03",
+				kind: "stop",
+				title: "Do not press send",
+				body: "A student demonstration stops at the screenshot of the TXT record. The forged invoice is the crime."
+			},
+			{
+				n: "04",
+				kind: "defend",
+				title: "Fix DNS this afternoon",
+				body: "-all, DMARC p=reject, disable user-to-user forwarding, train finance to call a known number before paying."
+			}
+		]
+	},
+	{
+		id: "ayesha",
+		kicker: "Personal correlation",
+		title: "Ayesha K. — three public facts, one residence",
+		org: "Fictional student persona (consent built into the range)",
+		minutes: 6,
+		blurb: "A reused handle, a Gravatar, and a holiday JPEG with GPS. Each fact is public. Together they sketch a life. This is why the lab starts with a self-audit.",
+		viva: "Show how you refused to merge identities on a single 200, then show the two independent sources that made the correlation defensible.",
+		evidence: [
+			{
+				label: "Handle",
+				value: "ayesha.k — GitHub 200, Instagram 200 (simulated)"
+			},
+			{
+				label: "GitHub bio",
+				value: "CS student · Karachi"
+			},
+			{
+				label: "Gravatar",
+				value: "Present for 2021-batch university address"
+			},
+			{
+				label: "Photo EXIF",
+				value: "N 24.8607, E 67.0011 · iPhone 13 · 18:04 PKT"
+			},
+			{
+				label: "Consent",
+				value: "Persona is fictional; treat a real classmate as out of scope"
+			}
+		],
+		findings: [{
+			id: "ay-reuse",
+			title: "Username reuse across two public sites",
+			severity: "low",
+			owasp: "A01:2021 Broken Access Control",
+			cwe: "CWE-359",
+			observation: "ayesha.k exists on GitHub (bio: Karachi student) and a matching public Instagram.",
+			why: "One 200 is a page. Two independent pages with the same unusual handle and the same city is a correlation. It is still not a legal identity.",
+			fix: "Unique handles on email, banking, and university SSO. Reuse is fine on throwaway hobbies.",
+			stop: "Do not message, follow, or visit the person. Correlation is not consent to contact."
+		}, {
+			id: "ay-exif",
+			title: "Holiday photo still carries GPS",
+			severity: "medium",
+			owasp: "A01:2021 Broken Access Control",
+			cwe: "CWE-200",
+			observation: "EXIF GPS ≈ I.I. Chundrigar / campus-adjacent; timestamp 18:04.",
+			why: "A repeated evening geotag plus a student bio is how OSINT becomes a physical-security issue. The camera wrote the truth into the file.",
+			fix: "Export without location. Strip EXIF before Instagram. Turn off precise location for the camera roll.",
+			stop: "Do not go to the coordinates. Doxxing and stalking are offences under PECA, not clever analysis."
+		}],
+		path: [
+			{
+				n: "01",
+				kind: "observe",
+				title: "Public profile + file metadata",
+				body: "Username probe and in-browser EXIF. No breach dump, no login, no face recognition."
+			},
+			{
+				n: "02",
+				kind: "infer",
+				title: "Likely campus-adjacent evenings",
+				body: "Two independent sources (bio city + GPS) support a cautious inference. Write it as inference, not fact."
+			},
+			{
+				n: "03",
+				kind: "stop",
+				title: "No approach, no reset questions",
+				body: "Using the data to answer a password-reset prompt, to shoulder-surf, or to wait outside a hostel is the crime."
+			},
+			{
+				n: "04",
+				kind: "defend",
+				title: "Shrink the footprint",
+				body: "Unique handles, 2FA on email first, strip EXIF, search your own name quarterly. That is the whole point of the FYP."
+			}
+		]
+	},
+	{
+		id: "atlas-staging",
+		kicker: "Certificate transparency",
+		title: "Atlas Pay — staging walked in through the front log",
+		org: "Fictional payments startup (training range only)",
+		minutes: 7,
+		blurb: "Public certificate-transparency logs list staging and vpn hostnames. Nobody scanned a port. A CA already published the names.",
+		viva: "Why is crt.sh OSINT, and why is then opening staging.atlas-pay.example in Burp not OSINT?",
+		evidence: [
+			{
+				label: "Apex",
+				value: "atlas-pay.example (fictional)"
+			},
+			{
+				label: "CT names",
+				value: "www · api · staging · admin-staging · vpn"
+			},
+			{
+				label: "Issuer",
+				value: "Let's Encrypt (simulated)"
+			},
+			{
+				label: "TXT",
+				value: "google-site-verification=3f9c… (not a secret, still noisy)"
+			}
+		],
+		findings: [{
+			id: "at-ct",
+			title: "Staging and VPN names in public certificates",
+			severity: "medium",
+			owasp: "A05:2021 Misconfiguration",
+			cwe: "CWE-668",
+			observation: "staging.atlas-pay.example, admin-staging.atlas-pay.example, vpn.atlas-pay.example",
+			why: "Let’s Encrypt logs every issuance. Staging often has debug, seed users, or last quarter’s feature flags. The name is public; the service behind it may not have been meant to be.",
+			fix: "Use a private CA or internal names for staging. Split-horizon DNS. Do not request public certificates for vpn. or admin-staging.",
+			stop: "Do not port-scan, open, or brute-force staging. Seeing the name in crt.sh is the end of the OSINT step."
+		}, {
+			id: "at-txt",
+			title: "Site-verification token in DNS",
+			severity: "info",
+			owasp: "A05:2021 Misconfiguration",
+			cwe: "CWE-200",
+			observation: "google-site-verification=3f9c… published on the apex",
+			why: "Verification TXT records are designed to be public. They still tell you which cloud and marketing tools the company uses.",
+			fix: "Acceptable. Do not treat them as credentials. Rotate if a vendor asks you to.",
+			stop: "A verification token is not a password. Do not try it as one."
+		}],
+		path: [
+			{
+				n: "01",
+				kind: "observe",
+				title: "crt.sh is a public log",
+				body: "Certificate transparency is how the web audits CAs. Anyone may list names. That is the design."
+			},
+			{
+				n: "02",
+				kind: "infer",
+				title: "Staging is probably softer than prod",
+				body: "A reasonable defender assumption: debug on, WAF off, copied production data. Still an assumption until you have a contract to test."
+			},
+			{
+				n: "03",
+				kind: "stop",
+				title: "No Nmap, no Burp, no default creds",
+				body: "The moment you send a probe to staging.atlas-pay.example you have left OSINT. Coursework does not include that step."
+			},
+			{
+				n: "04",
+				kind: "defend",
+				title: "Hide the name, then harden the box",
+				body: "Private certificates, VPN-only staging, no prod data in fixtures, bug bounty scoped to production with written rules."
+			}
+		]
+	}
+];
+Object.fromEntries(SCENARIOS.map((s) => [s.id, s]));
+var tool$2 = TOOL_BY_ID.range;
+function RangeTool() {
+	const [id, setId] = (0, import_react.useState)(SCENARIOS[0]?.id ?? "harbor-clinic");
+	const scenario = (0, import_react.useMemo)(() => SCENARIOS.find((s) => s.id === id) ?? SCENARIOS[0], [id]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToolFrame, {
+		tool: tool$2,
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "mb-6 rounded-xl border border-border bg-card px-4 py-3 text-sm text-muted",
+				children: "Four marked scripts. Hostnames end in .example and are not real. Walk the path in a viva: observation, inference, the stop line, then the fix."
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+				className: "grid gap-3 sm:grid-cols-2",
+				children: SCENARIOS.map((s) => {
+					const active = s.id === scenario.id;
+					return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						type: "button",
+						onClick: () => setId(s.id),
+						className: cn("h-full w-full rounded-xl border p-4 text-left transition-colors duration-150", active ? "border-accent/50 bg-card-2" : "border-border bg-card hover:bg-card-2/60"),
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[11px] tracking-[0.16em] text-accent uppercase",
+								children: s.kicker
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-2 font-medium leading-snug",
+								children: s.title
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-2 text-sm text-muted",
+								children: s.blurb
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								className: "mt-3 font-mono text-[11px] tabular-nums text-faint",
+								children: [s.minutes, " min"]
+							})
+						]
+					}) }, s.id);
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScenarioBody, { scenario })
+		]
+	});
+}
+function ScenarioBody({ scenario }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "mt-10 space-y-8",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", { children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex flex-wrap items-center gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+						variant: "accent",
+						children: scenario.kicker
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, { children: "Fictional range" })]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+					className: "mt-4 font-display text-3xl tracking-tight",
+					children: scenario.title
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-2 text-sm text-muted",
+					children: scenario.org
+				})
+			] }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+				className: "mb-2 text-xs tracking-[0.16em] text-faint uppercase",
+				children: "Public evidence (simulated)"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
+				className: "divide-y divide-border overflow-hidden rounded-xl border border-border bg-card",
+				children: scenario.evidence.map((row) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "grid grid-cols-1 gap-1 px-4 py-3 sm:grid-cols-3 sm:gap-4",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
+						className: "text-xs tracking-[0.12em] text-faint uppercase",
+						children: row.label
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+						className: "font-mono text-sm break-all sm:col-span-2",
+						children: row.value
+					})]
+				}, row.label))
+			})] }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "space-y-3",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+					className: "text-xs tracking-[0.16em] text-faint uppercase",
+					children: "Mapped observations"
+				}), scenario.findings.map((f) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FindingCard, { finding: f }, f.id))]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+				className: "mb-3 text-xs tracking-[0.16em] text-faint uppercase",
+				children: "Attack path"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AttackPath, { steps: scenario.path })] }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "rounded-xl border border-border bg-card p-5",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+						className: "text-xs tracking-[0.16em] text-faint uppercase",
+						children: "Viva prompt"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-2 text-sm leading-relaxed",
+						children: scenario.viva
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						className: "mt-3 text-sm text-muted",
+						children: [
+							"Pair with",
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/academy/$slug",
+								params: { slug: "attack-paths" },
+								className: "underline-offset-4 hover:underline",
+								children: "attack-path method"
+							}),
+							"."
+						]
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AddFindingButton, {
+				tool: "range",
+				query: scenario.id,
+				summary: `${scenario.title} · ${scenario.findings.length} mapped observations`,
+				detail: JSON.stringify({
+					scenario: scenario.id,
+					evidence: scenario.evidence,
+					findings: scenario.findings.map((f) => ({
+						title: f.title,
+						severity: f.severity,
+						owasp: f.owasp,
+						cwe: f.cwe
+					})),
+					path: scenario.path
+				}, null, 2)
+			})
 		]
 	});
 }
@@ -1546,10 +2387,12 @@ var MAP = {
 	image: ImageTool,
 	phone: PhoneTool,
 	hash: HashTool,
-	dorks: DorksTool
+	dorks: DorksTool,
+	exposure: ExposureTool,
+	range: RangeTool
 };
 function LabTool() {
-	const { tool } = Route.useParams();
+	const { tool } = Route$1.useParams();
 	const def = TOOL_BY_ID[tool];
 	const Comp = MAP[tool];
 	if (!def || !Comp) throw notFound();

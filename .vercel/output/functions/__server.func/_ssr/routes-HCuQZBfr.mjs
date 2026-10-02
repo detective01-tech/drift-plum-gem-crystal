@@ -1,9 +1,9 @@
-import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+import { b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
-import { m as ArrowRight } from "../_libs/lucide-react.mjs";
-import { i as TOOLS, n as Button, o as useCaseFile, r as CYCLE, t as AppShell } from "./app-shell-328RJKdX.mjs";
-import { t as Badge } from "./badge-DoYw696V.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-kVmfiRyu.js
+import { g as ArrowRight } from "../_libs/lucide-react.mjs";
+import { a as TOOLS, n as Button, r as CYCLE, s as useCaseFile, t as AppShell } from "./app-shell-DeTVcByP.mjs";
+import { t as Badge } from "./badge-BrMyOu1F.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-HCuQZBfr.js
 var import_jsx_runtime = require_jsx_runtime();
 function Home() {
 	const accepted = useCaseFile((s) => s.ethicsAcceptedAt);
@@ -21,7 +21,7 @@ function Home() {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 				className: "mt-6 max-w-2xl text-base text-muted sm:text-lg",
-				children: "OpenLens is an educational OSINT workbench. It queries public DNS, public profiles, and files you already have so you can audit your own digital footprint. It will not crack passwords, scan ports, or hunt people who did not consent."
+				children: "OpenLens is an educational OSINT workbench. It queries public DNS, public profiles, HTTP headers, and files you already have so you can audit your own digital footprint and map visible misconfiguration to OWASP — without exploiting it. It will not crack passwords, scan ports, or hunt people who did not consent."
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "mt-8 flex flex-wrap gap-3",
@@ -29,8 +29,8 @@ function Home() {
 					asChild: true,
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 						to: "/lab/$tool",
-						params: { tool: "username" },
-						children: ["Start with username recon", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "size-4" })]
+						params: { tool: "exposure" },
+						children: ["Start with HTTP surface", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "size-4" })]
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 					asChild: true,
@@ -45,12 +45,12 @@ function Home() {
 				className: "mt-12 grid grid-cols-3 gap-4 border-y border-border py-6",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Stat, {
-						n: "10",
+						n: "12",
 						l: "modules"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Stat, {
-						n: "24",
-						l: "profile sources"
+						n: "4",
+						l: "range cases"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Stat, {
 						n: String(findings),
@@ -138,10 +138,11 @@ function Home() {
 						className: "mt-4 list-decimal space-y-2 pl-5 text-sm text-muted",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Load the sample subject on Username, Domain, IP, and GitHub — they are public documentation accounts." }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Run HTTP surface on example.com and walk one Training range case (Harbor Clinic is the default viva script)." }),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Drop a photo you took into Image forensics and show whether GPS was stored." }),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Build search dorks for your own name; open one query in a new tab." }),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Save findings to the case file and print / export the report." }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Take the five-question ethics quiz in the Academy." })
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Take the ten-question ethics and exposure quiz in the Academy." })
 						]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {

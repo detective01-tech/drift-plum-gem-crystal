@@ -44,6 +44,11 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
       items: NAV.filter((n) => n.group === "local"),
     },
     {
+      key: "exposure",
+      label: "Exposure",
+      items: NAV.filter((n) => n.group === "exposure"),
+    },
+    {
       key: "out",
       label: "Output",
       items: NAV.filter((n) => ["/report", "/academy", "/ethics"].includes(n.href)),

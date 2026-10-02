@@ -1,6 +1,6 @@
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
-import { o as useCaseFile, t as AppShell } from "./app-shell-328RJKdX.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/ethics-B9wg8Pxf.js
+import { s as useCaseFile, t as AppShell } from "./app-shell-DeTVcByP.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/ethics-8-RL7ADx.js
 var import_jsx_runtime = require_jsx_runtime();
 var SECTIONS = [
 	{
@@ -9,11 +9,11 @@ var SECTIONS = [
 	},
 	{
 		h: "Allowed",
-		p: "Accounts you own. The built-in sample subject (octocat, example.com, 1.1.1.1, documentation emails). Systems you have written permission to assess. Public DNS, RDAP, certificate transparency, and public profile URLs."
+		p: "Accounts you own. The built-in sample subject (octocat, example.com, 1.1.1.1, documentation emails). The fictional Training range. Systems you have written permission to assess. Public DNS, RDAP, certificate transparency, public HTTP headers, robots.txt, security.txt, and public profile URLs."
 	},
 	{
 		h: "Forbidden",
-		p: "Doxxing, stalking, harassment. Password guessing or cracking. Port scans and vulnerability exploitation. Scraping behind a login. Reverse-phone owner lookup. Purchasing or searching stolen breach dumps through this lab. Targeting classmates, relatives, or strangers “for the demo”."
+		p: "Doxxing, stalking, harassment. Password guessing or cracking. Port scans, directory brute force, and vulnerability exploitation. Scraping behind a login. Reverse-phone owner lookup. Purchasing or searching stolen breach dumps through this lab. Targeting classmates, relatives, or strangers “for the demo”. Sending spoofed mail to “prove” a missing DMARC record."
 	},
 	{
 		h: "Law",
@@ -21,7 +21,7 @@ var SECTIONS = [
 	},
 	{
 		h: "Engineering limits",
-		p: "Lookups are throttled. Private and loopback addresses are blocked so the URL inspector cannot be used as SSRF. Image metadata never leaves the browser. Nothing is stored on a server."
+		p: "Lookups are throttled. Private and loopback addresses are blocked so the URL inspector cannot be used as SSRF. Image metadata never leaves the browser. HTTP surface reads headers and two well-known files only. Nothing is stored on a server."
 	}
 ];
 function EthicsPage() {

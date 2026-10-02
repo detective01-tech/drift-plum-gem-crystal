@@ -1,6 +1,6 @@
 import { a as __toESM, t as __exportAll } from "./rolldown-runtime-D7D4PA-g.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
-import { _ as createRootRoute, g as createFileRoute, h as lazyRouteComponent, l as Scripts, m as Outlet, p as createRouter, u as HeadContent, y as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
+import { _ as lazyRouteComponent, d as Scripts, f as HeadContent, g as Outlet, h as createRouter, v as createFileRoute, x as useRouter, y as createRootRoute } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
 import { a as string, i as object, n as literal, o as union, r as number } from "../_libs/zod.mjs";
 import { r as TriangleAlert } from "../_libs/lucide-react.mjs";
@@ -8,7 +8,7 @@ import { n as Portal, r as Provider, t as Content2 } from "../_libs/@radix-ui/re
 import { n as clsx } from "../_libs/class-variance-authority+clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { t as Toaster } from "../_libs/sonner.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-B9M01Ilw.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-6Ed5zkYE.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var FALLBACK_MESSAGE = "An unexpected error occurred. Try reloading the page.";
@@ -313,9 +313,9 @@ var TooltipContent = import_react.forwardRef(({ className, sideOffset = 6, ...pr
 	...props
 }) }));
 TooltipContent.displayName = Content2.displayName;
-var styles_default = "/assets/styles-B86joszv.css";
+var styles_default = "/assets/styles-DWT47slv.css";
 var APP_NAME = "OpenLens";
-var Route$6 = createRootRoute({
+var Route$7 = createRootRoute({
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
@@ -326,7 +326,7 @@ var Route$6 = createRootRoute({
 			{ title: APP_NAME },
 			{
 				name: "description",
-				content: "OpenLens is an educational OSINT laboratory for digital-footprint awareness, public-source collection, and ethical intelligence practice."
+				content: "OpenLens is an educational OSINT laboratory for digital-footprint awareness, public-source collection, and ethical mapping of visible misconfiguration."
 			},
 			{
 				name: "theme-color",
@@ -392,47 +392,47 @@ var Route$6 = createRootRoute({
 		})]
 	})
 });
-var $$splitComponentImporter$5 = () => import("./routes-kVmfiRyu.mjs");
-var Route$5 = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter$5, "component") });
-var $$splitComponentImporter$4 = () => import("./academy-BULZ0tuE.mjs");
-var Route$4 = createFileRoute("/academy")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
-var $$splitComponentImporter$3 = () => import("./ethics-B9wg8Pxf.mjs");
-var Route$3 = createFileRoute("/ethics")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
-var $$splitComponentImporter$2 = () => import("./report-Bb3C-ew3.mjs");
-var Route$2 = createFileRoute("/report")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
-var $$splitComponentImporter$1 = () => import("./academy._slug-D7g4LDih.mjs");
-var Route$1 = createFileRoute("/academy/$slug")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
-var $$splitComponentImporter = () => import("./lab._tool-DPr3mnnM.mjs");
-var Route = createFileRoute("/lab/$tool")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
-var IndexRoute = Route$5.update({
+var $$splitComponentImporter$5 = () => import("./routes-HCuQZBfr.mjs");
+var Route$6 = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter$5, "component") });
+var $$splitComponentImporter$4 = () => import("./academy-6cXgXE2p.mjs");
+var Route$5 = createFileRoute("/academy")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
+var $$splitComponentImporter$3 = () => import("./ethics-8-RL7ADx.mjs");
+var Route$4 = createFileRoute("/ethics")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
+var $$splitComponentImporter$2 = () => import("./report-DsB8Q_Vj.mjs");
+var Route$3 = createFileRoute("/report")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
+var $$splitComponentImporter$1 = () => import("./academy._slug-DjcIE63C.mjs");
+var Route$2 = createFileRoute("/academy/$slug")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
+var $$splitComponentImporter = () => import("./lab._tool-BrsG5f0q.mjs");
+var Route$1 = createFileRoute("/lab/$tool")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
+var IndexRoute = Route$6.update({
 	id: "/",
 	path: "/",
-	getParentRoute: () => Route$6
+	getParentRoute: () => Route$7
 });
-var AcademyRoute = Route$4.update({
+var AcademyRoute = Route$5.update({
 	id: "/academy",
 	path: "/academy",
-	getParentRoute: () => Route$6
+	getParentRoute: () => Route$7
 });
-var EthicsRoute = Route$3.update({
+var EthicsRoute = Route$4.update({
 	id: "/ethics",
 	path: "/ethics",
-	getParentRoute: () => Route$6
+	getParentRoute: () => Route$7
 });
-var ReportRoute = Route$2.update({
+var ReportRoute = Route$3.update({
 	id: "/report",
 	path: "/report",
-	getParentRoute: () => Route$6
+	getParentRoute: () => Route$7
 });
-var AcademySlugRoute = Route$1.update({
+var AcademySlugRoute = Route$2.update({
 	id: "/$slug",
 	path: "/$slug",
 	getParentRoute: () => AcademyRoute
 });
-var LabToolRoute = Route.update({
+var LabToolRoute = Route$1.update({
 	id: "/lab/$tool",
 	path: "/lab/$tool",
-	getParentRoute: () => Route$6
+	getParentRoute: () => Route$7
 });
 var AcademyRouteChildren = { AcademySlugRoute };
 var rootRouteChildren = {
@@ -442,7 +442,7 @@ var rootRouteChildren = {
 	ReportRoute,
 	LabToolRoute
 };
-var routeTree = Route$6._addFileChildren(rootRouteChildren)._addFileTypes();
+var routeTree = Route$7._addFileChildren(rootRouteChildren)._addFileTypes();
 var router_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 function getRouter() {
 	return createRouter({
@@ -451,4 +451,4 @@ function getRouter() {
 	});
 }
 //#endregion
-export { cn as i, Route as n, Route$1 as r, router_exports as t };
+export { cn as i, Route$1 as n, Route$2 as r, router_exports as t };

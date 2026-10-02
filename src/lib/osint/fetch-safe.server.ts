@@ -1,4 +1,5 @@
 import { isPrivateHost } from "./validate";
+import { pickResponseHeaders } from "./surface";
 
 const UA =
   "OpenLens/1.0 (Educational OSINT laboratory; academic coursework; public-source only)";
@@ -30,6 +31,8 @@ export type SafeFetchResult = {
   finalUrl: string;
   snippet: string;
   error: string | null;
+  headers: Record<string, string>;
+  setCookie: string[];
 };
 
 function assertPublicHttpUrl(raw: string): URL {
@@ -55,6 +58,7 @@ export async function safeFetch(
   const timeoutMs = opts.timeoutMs ?? 4000;
   const maxBytes = opts.maxBytes ?? 24_000;
   const url = assertPublicHttpUrl(raw);
+  const empty = { headers: {} as Record<string, string>, setCookie: [] as string[] };
 
   try {
     const res = await fetch(url, {
@@ -67,6 +71,7 @@ export async function safeFetch(
       signal: AbortSignal.timeout(timeoutMs),
     });
     const location = res.headers.get("location");
+    const picked = pickResponseHeaders(res.headers);
     let snippet = "";
     if (method === "GET" && res.body) {
       const buf = new Uint8Array(await res.arrayBuffer());
@@ -80,6 +85,8 @@ export async function safeFetch(
       finalUrl: url.toString(),
       snippet,
       error: null,
+      headers: picked.headers,
+      setCookie: picked.setCookie,
     };
   } catch (err) {
     const message = err instanceof Error ? err.message : "fetch failed";
@@ -90,6 +97,7 @@ export async function safeFetch(
       finalUrl: url.toString(),
       snippet: "",
       error: message,
+      ...empty,
     };
   }
 }

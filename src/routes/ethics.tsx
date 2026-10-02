@@ -11,11 +11,11 @@ const SECTIONS = [
   },
   {
     h: "Allowed",
-    p: "Accounts you own. The built-in sample subject (octocat, example.com, 1.1.1.1, documentation emails). Systems you have written permission to assess. Public DNS, RDAP, certificate transparency, and public profile URLs.",
+    p: "Accounts you own. The built-in sample subject (octocat, example.com, 1.1.1.1, documentation emails). The fictional Training range. Systems you have written permission to assess. Public DNS, RDAP, certificate transparency, public HTTP headers, robots.txt, security.txt, and public profile URLs.",
   },
   {
     h: "Forbidden",
-    p: "Doxxing, stalking, harassment. Password guessing or cracking. Port scans and vulnerability exploitation. Scraping behind a login. Reverse-phone owner lookup. Purchasing or searching stolen breach dumps through this lab. Targeting classmates, relatives, or strangers “for the demo”.",
+    p: "Doxxing, stalking, harassment. Password guessing or cracking. Port scans, directory brute force, and vulnerability exploitation. Scraping behind a login. Reverse-phone owner lookup. Purchasing or searching stolen breach dumps through this lab. Targeting classmates, relatives, or strangers “for the demo”. Sending spoofed mail to “prove” a missing DMARC record.",
   },
   {
     h: "Law",
@@ -23,7 +23,7 @@ const SECTIONS = [
   },
   {
     h: "Engineering limits",
-    p: "Lookups are throttled. Private and loopback addresses are blocked so the URL inspector cannot be used as SSRF. Image metadata never leaves the browser. Nothing is stored on a server.",
+    p: "Lookups are throttled. Private and loopback addresses are blocked so the URL inspector cannot be used as SSRF. Image metadata never leaves the browser. HTTP surface reads headers and two well-known files only. Nothing is stored on a server.",
   },
 ];
 

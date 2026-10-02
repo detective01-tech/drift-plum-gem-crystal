@@ -1,12 +1,12 @@
 import { a as __toESM } from "./rolldown-runtime-D7D4PA-g.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
-import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+import { b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
-import { i as cn } from "./router-B9M01Ilw.mjs";
-import { n as Button, o as useCaseFile, t as AppShell } from "./app-shell-328RJKdX.mjs";
-import { r as QUIZ, t as ARTICLES } from "./academy-BI0bfjf_.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/academy-BULZ0tuE.js
+import { i as cn } from "./router-6Ed5zkYE.mjs";
+import { n as Button, s as useCaseFile, t as AppShell } from "./app-shell-DeTVcByP.mjs";
+import { r as QUIZ, t as ARTICLES } from "./academy-BM2fVPuC.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/academy-6cXgXE2p.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function Quiz() {
@@ -147,7 +147,7 @@ function Academy() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-2 text-sm text-muted",
-						children: "Five questions. Save the score to the case file for your appendix."
+						children: "Ten questions. Save the score to the case file for your appendix."
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Quiz, {})
 				]

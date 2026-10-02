@@ -1,7 +1,7 @@
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
-import { n as Button, o as useCaseFile, t as AppShell } from "./app-shell-328RJKdX.mjs";
-import { n as Label, r as Textarea, t as Input } from "./textarea-C8N6TXwU.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/report-Bb3C-ew3.js
+import { n as Button, s as useCaseFile, t as AppShell } from "./app-shell-DeTVcByP.mjs";
+import { n as Label, r as Textarea, t as Input } from "./textarea-DUHBqqKz.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/report-DsB8Q_Vj.js
 var import_jsx_runtime = require_jsx_runtime();
 function ReportPage() {
 	const title = useCaseFile((s) => s.title);
@@ -184,7 +184,7 @@ function ReportPage() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 						className: "text-xs leading-relaxed text-faint",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Limitations: HTTP 200 is not identity. IP geolocation is probabilistic. Many platforms block datacentre IPs. No breach corpora. No authentication bypass. This instrument is for education." }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Limitations: HTTP 200 is not identity. IP geolocation is probabilistic. Many platforms block datacentre IPs. Header checks are not a penetration test. No breach corpora. No authentication bypass. This instrument is for education." }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "mt-2",
 							children: "Suggested citation: OpenLens (2026). Educational OSINT Laboratory. Web application."
 						})]

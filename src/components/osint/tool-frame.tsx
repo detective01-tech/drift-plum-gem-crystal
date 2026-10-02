@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { ToolDef } from "@/lib/osint/catalog";
+import { GROUP_LABEL } from "@/lib/osint/catalog";
 
 export function ToolFrame({
   tool,
@@ -15,7 +16,7 @@ export function ToolFrame({
 }) {
   return (
     <div className="mx-auto max-w-3xl">
-      <p className="text-[11px] tracking-[0.18em] text-accent uppercase">{tool.group === "local" ? "Local analysis" : "Collection"}</p>
+      <p className="text-[11px] tracking-[0.18em] text-accent uppercase">{GROUP_LABEL[tool.group]}</p>
       <h1 className="mt-2 font-display text-4xl tracking-tight sm:text-5xl">{tool.name}</h1>
       <p className="mt-4 max-w-2xl text-muted">{tool.lesson}</p>
       <div className="mt-5 flex flex-wrap items-center gap-3">

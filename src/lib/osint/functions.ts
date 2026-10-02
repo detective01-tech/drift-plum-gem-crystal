@@ -2,7 +2,15 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { PLATFORM_BY_ID, USERNAME_RE } from "./platforms";
 import { isDomain, isEmail, isHttpUrl, isIp, isPrivateHost } from "./validate";
+import { analyzeEmailAuth } from "./email-auth";
 import { rateLimit, safeFetch, safeJson } from "./fetch-safe.server";
+import {
+  analyzeCookies,
+  analyzeHeaders,
+  analyzeRobots,
+  analyzeSecurityTxt,
+  hardeningScore,
+} from "./surface";
 
 async function clientKey() {
   const { getRequestHeader } = await import("@tanstack/react-start/server");
@@ -105,6 +113,9 @@ export const lookupDomain = createServerFn({ method: "POST" })
 
     const types = ["A", "AAAA", "MX", "NS", "TXT", "CNAME", "SOA"] as const;
     const dns = await Promise.all(types.map((t) => doh(domain, t)));
+    const dmarc = await doh(`_dmarc.${domain}`, "TXT");
+    const txt = dns.find((b) => b.type === "TXT")?.records.map((r) => r.data) ?? [];
+    const mailAuth = analyzeEmailAuth(txt, dmarc.records.map((r) => r.data));
 
     const rdap = await safeJson<Record<string, unknown>>(`https://rdap.org/domain/${encodeURIComponent(domain)}`, {
       timeoutMs: 7000,
@@ -142,6 +153,7 @@ export const lookupDomain = createServerFn({ method: "POST" })
         nameservers,
         status,
       },
+      mailAuth,
     };
   });
 
@@ -322,4 +334,69 @@ export const inspectUrl = createServerFn({ method: "POST" })
       }
     }
     return { chain };
+  });
+
+export const inspectSurface = createServerFn({ method: "POST" })
+  .validator(z.object({ url: z.string().min(8).max(1500) }))
+  .handler(async ({ data }) => {
+    rateLimit(`surf:${await clientKey()}`, 12, 10 * 60 * 1000);
+    if (!isHttpUrl(data.url)) throw new Error("Only public http(s) URLs");
+
+    let current = data.url.trim();
+    let last = await safeFetch(current, { method: "GET", timeoutMs: 5000, maxBytes: 2048 });
+    const hops: string[] = [current];
+    for (let i = 0; i < 4 && last.location; i++) {
+      let next: string;
+      try {
+        next = new URL(last.location, current).toString();
+      } catch {
+        break;
+      }
+      const host = new URL(next).hostname;
+      if (isPrivateHost(host)) {
+        throw new Error("Redirect to a private address was blocked");
+      }
+      current = next;
+      hops.push(current);
+      last = await safeFetch(current, { method: "GET", timeoutMs: 5000, maxBytes: 2048 });
+    }
+
+    if (last.error && last.status === 0) {
+      throw new Error(last.error);
+    }
+
+    const origin = new URL(last.finalUrl).origin;
+    const robotsP = safeFetch(`${origin}/robots.txt`, { method: "GET", timeoutMs: 4000, maxBytes: 8000 });
+    const secP = safeFetch(`${origin}/.well-known/security.txt`, {
+      method: "GET",
+      timeoutMs: 4000,
+      maxBytes: 4000,
+    });
+    const [robots, security] = await Promise.all([robotsP, secP]);
+
+    const findings = [
+      ...analyzeHeaders({
+        url: data.url,
+        finalUrl: last.finalUrl,
+        status: last.status,
+        headers: last.headers,
+      }),
+      ...analyzeCookies(last.setCookie),
+      ...analyzeRobots(robots.ok ? robots.snippet : null, robots.status),
+      ...analyzeSecurityTxt(security.ok ? security.snippet : null, security.status),
+    ];
+
+    return {
+      url: data.url,
+      finalUrl: last.finalUrl,
+      https: last.finalUrl.toLowerCase().startsWith("https:"),
+      status: last.status,
+      hops,
+      headers: last.headers,
+      setCookie: last.setCookie,
+      robots: { status: robots.status, body: robots.ok ? robots.snippet.slice(0, 2000) : null },
+      securityTxt: { status: security.status, body: security.ok ? security.snippet.slice(0, 1500) : null },
+      findings,
+      score: hardeningScore(findings),
+    };
   });

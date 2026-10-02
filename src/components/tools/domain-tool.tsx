@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { AddFindingButton } from "@/components/osint/add-finding";
+import { FindingCard } from "@/components/osint/finding-card";
 import { ResultTable, ToolFrame } from "@/components/osint/tool-frame";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -82,6 +84,25 @@ export function DomainTool() {
               { label: "RDAP NS", value: result.rdap.nameservers.join(", ") },
             ]}
           />
+          {result.mailAuth ? (
+            <section className="space-y-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 className="text-xs tracking-[0.16em] text-faint uppercase">Email authentication (SPF / DMARC)</h2>
+                <Badge variant={result.mailAuth.spf.qualifier === "reject" ? "ok" : "warn"}>
+                  SPF {result.mailAuth.spf.qualifier}
+                </Badge>
+                <Badge variant={result.mailAuth.dmarc.policy === "reject" || result.mailAuth.dmarc.policy === "quarantine" ? "ok" : "warn"}>
+                  DMARC {result.mailAuth.dmarc.policy}
+                </Badge>
+              </div>
+              <p className="text-sm text-muted">
+                Read from public TXT records. This is not a spoof test — do not send mail as this domain.
+              </p>
+              {result.mailAuth.findings.map((f) => (
+                <FindingCard key={f.id} finding={f} />
+              ))}
+            </section>
+          ) : null}
           {result.dns.map((block) => (
             <section key={block.type}>
               <h2 className="mb-2 text-xs tracking-[0.16em] text-faint uppercase">{block.type} records</h2>
@@ -106,7 +127,7 @@ export function DomainTool() {
               tool="domain"
               query={result.domain}
               summary={`DNS + RDAP for ${result.domain}${result.rdap.registrar ? ` (${result.rdap.registrar})` : ""}`}
-              detail={JSON.stringify({ rdap: result.rdap, dns: result.dns }, null, 2)}
+              detail={JSON.stringify({ rdap: result.rdap, dns: result.dns, mailAuth: result.mailAuth }, null, 2)}
             />
           </div>
           {certs ? (

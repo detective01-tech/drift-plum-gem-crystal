@@ -2,21 +2,22 @@ import type { LucideIcon } from "lucide-react";
 import {
   AtSign,
   Binary,
-  FileSearch,
   Github,
   Globe,
   Hash,
   ImageIcon,
   Link2,
   Phone,
+  Route,
   Search,
+  ShieldAlert,
   UserRound,
 } from "lucide-react";
 
 export type ToolDef = {
   id: string;
   name: string;
-  group: "collection" | "local" | "output";
+  group: "collection" | "local" | "exposure" | "output";
   blurb: string;
   lesson: string;
   sample: string;
@@ -40,9 +41,9 @@ export const TOOLS: ToolDef[] = [
     id: "domain",
     name: "Domain intel",
     group: "collection",
-    blurb: "DNS records, RDAP registration, certificate-transparency names.",
+    blurb: "DNS records, RDAP registration, certificate-transparency names, SPF/DMARC.",
     lesson:
-      "DNS and RDAP are public by design. They tell you how a name is delegated (MX, NS, TXT), who registered it, and which hostnames appeared on public TLS certificates. This is passive reconnaissance — no port scans, no brute force.",
+      "DNS and RDAP are public by design. They tell you how a name is delegated (MX, NS, TXT), who registered it, and which hostnames appeared on public TLS certificates. SPF and DMARC live in the same TXT records — they are email-authentication policy, not a licence to spoof. This is passive reconnaissance — no port scans, no brute force.",
     sample: "example.com",
     sampleHint: "IANA reserved documentation domain",
     icon: Globe,
@@ -135,9 +136,38 @@ export const TOOLS: ToolDef[] = [
     sampleHint: "Use your own name or brand",
     icon: Search,
   },
+  {
+    id: "exposure",
+    name: "HTTP surface",
+    group: "exposure",
+    blurb: "Passive security headers, cookies, robots.txt, security.txt. Not a pentest.",
+    lesson:
+      "A single public GET is enough to see missing HSTS, a PHP version in X-Powered-By, cookies without HttpOnly, and a robots.txt that names /backup/. Those are OWASP A05 observations. This module never port-scans, never fuzzes paths, and never sends an exploit. Run it on a site you own, or on the sample.",
+    sample: "https://example.com",
+    sampleHint: "IANA example site",
+    icon: ShieldAlert,
+  },
+  {
+    id: "range",
+    name: "Training range",
+    group: "exposure",
+    blurb: "Four fictional cases: misconfig, mail spoofing, EXIF, staging leak.",
+    lesson:
+      "Live sites go down, block datacentre IPs, and are a poor viva. The range is a marked script of four organisations that never existed. Each case maps an OSINT observation to an OWASP/CWE id, draws the attack path, and paints a red stop line before the payload. You cannot exploit a hostname that is not real — which is the point.",
+    sample: "",
+    sampleHint: "Load Harbor Clinic",
+    icon: Route,
+  },
 ];
 
 export const TOOL_BY_ID = Object.fromEntries(TOOLS.map((t) => [t.id, t]));
+
+export const GROUP_LABEL: Record<ToolDef["group"], string> = {
+  collection: "Collection",
+  local: "Local analysis",
+  exposure: "Exposure",
+  output: "Output",
+};
 
 export const CYCLE = [
   { step: "01", title: "Direction", body: "Define a lawful question. Whose footprint? Why? What is out of scope?" },
