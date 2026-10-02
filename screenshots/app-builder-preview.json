@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "OpenLens",
+      "hasCanvas": false,
+      "bodyTextLen": 791,
+      "bodyTextHash": "692813b7f9980bc6e28528b0ed87d944f4be30322f1168edfb5779a593cf3806",
+      "bodyTextPrefix": "CHARTER · REQUIRED OpenLens is a teaching laboratory, not a weap",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "OpenLens",
+      "hasCanvas": false,
+      "bodyTextLen": 791,
+      "bodyTextHash": "692813b7f9980bc6e28528b0ed87d944f4be30322f1168edfb5779a593cf3806",
+      "bodyTextPrefix": "CHARTER · REQUIRED OpenLens is a teaching laboratory, not a weap",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
